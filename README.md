@@ -59,10 +59,6 @@ bun dev
 
 5. Open [http://localhost:3000](http://localhost:3000) in your browser to see the app.
 
-## How do I deploy this?
-
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
-
 ## License
 
 This project is open source and available under the [MIT License](LICENSE.md).

@@ -3,7 +3,7 @@
 import { compileMDX } from 'next-mdx-remote/rsc'
 import rehypePrettyCode, { type Options } from 'rehype-pretty-code'
 
-import { CodeBlock } from '@/components/ui/code-block'
+import { components } from '@/components/mdx'
 import { client } from '@/sanity/lib/client'
 import { urlFor } from '@/sanity/lib/image'
 import type { Post as SanityPost } from '@/sanity/schemaTypes/postType'
@@ -30,10 +30,7 @@ export const getPosts = async (): Promise<Post[]> => {
     return {
       ...post,
       mainImage: { src: imageUrl, alt: post.mainImage.alt },
-      author: {
-        ...post.author,
-        image: authorImage,
-      },
+      author: { ...post.author, image: authorImage },
     }
   })
 
@@ -60,7 +57,7 @@ export const getPost = async ({ slug }: { slug: string }): Promise<Post> => {
 
   const { content } = await compileMDX({
     source: post.body,
-    components: { figure: CodeBlock },
+    components,
     options: {
       parseFrontmatter: true,
       mdxOptions: { rehypePlugins: [[rehypePrettyCode, options]] },
@@ -71,9 +68,6 @@ export const getPost = async ({ slug }: { slug: string }): Promise<Post> => {
     ...post,
     body: content,
     mainImage: { src: imageUrl, alt: post.mainImage.alt },
-    author: {
-      ...post.author,
-      image: authorImage,
-    },
+    author: { ...post.author, image: authorImage },
   }
 }
